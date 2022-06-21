@@ -1,0 +1,98 @@
+﻿@model IEnumerable<HospitalWebApplication.Models.patient>
+
+@{
+    ViewData["Title"] = "Bed Summary Informations";
+}
+
+<h1>Bed Summary Informations</h1>
+
+<p>
+    <a asp-action="Create">Add New Patient</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.BedNo)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.URN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.presentingIssue)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.LastComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdate)
+            </th>           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.BedNo)
+            </td>            
+             <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.URN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.presentingIssue)
+            </td>             
+            <td>
+                @Html.DisplayFor(modelItem => item.LastComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdate)
+            </td>              
+            <td>
+                @if(@item.PatientID == 0 )
+                {
+                    <a asp-action="SelectPatient" asp-route-id="@item.BedID">Admit</a> 
+                }
+                else{
+                    <a asp-action="Details" asp-route-id="@item.PatientID">Patient Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.PatientID">Discharge</a>
+                }                
+            </td>            
+        </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+                @Html.DisplayName("Beds InUse : ")
+            </dt>
+            <dd class = "col-sm-10">
+               @Html.Raw(@ViewBag.BedInUse)
+            </dd>
+             <dt class = "col-sm-2">
+                @Html.DisplayName("Beds Available : ")
+            </dt>
+            <dd class = "col-sm-10">
+                 @Html.Raw(@ViewBag.BedsAvailable)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayName("Total Patients admitted today : ")
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.Raw(@ViewBag.TotalPatients)
+            </dd>
+        </dl>
+</div>

@@ -1,0 +1,40 @@
+﻿@model HospitalWebApplication.Models.patientComments
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Add Comments</h1>
+<div>
+    <h4>patients</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.URN)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.URN)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+    </dl>
+</div>
+  <form asp-action="Add">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="patientID" />
+        <div class="form-group">
+            <label asp-for="Nurse" class="control-label"></label>     
+            <input asp-for="Nurse" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Comments" class="control-label"></label>
+            <input asp-for="Comments" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+   </form>
+<div><a asp-action="Index">Back to List</a></div>

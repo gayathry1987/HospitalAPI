@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HospitalWebApplication.Models.patientDetails>
+@{
+    ViewData["Title"] = "SelectPatient";
+}
+<h1>Select Patient</h1>
+<table class="table">
+    <thead>
+        <tr>        
+            <th>
+                @Html.DisplayNameFor(model => model.URN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>     
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model){
+    @if(item.isDischarged ==false && item.isAdmitted == false)
+    {
+        <tr>            
+            <td>
+                @Html.DisplayFor(modelItem => item.URN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>   
+            <td>
+                <a asp-action="Update" asp-route-URN="@item.patientid" asp-route-bedNo="@item.bedID">Select</a> |
+                <a asp-action="Index">Back to List</a></td>
+             
+        </tr>
+        }
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
